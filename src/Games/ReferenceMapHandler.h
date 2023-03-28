@@ -35,7 +35,7 @@ class CReferenceMapHandler
 
 		virtual ~CReferenceMapHandler();
 
-		void Init();
+		void Init(std::string dir);
 
 		int GetActualRef();
 
@@ -64,6 +64,8 @@ class CReferenceMapHandler
 
 		// For map cycling
 		std::vector<int> IDList;
+
+		std::string baseDir;
 };
 
 #endif

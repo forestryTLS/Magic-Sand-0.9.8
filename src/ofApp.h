@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 #include "SandSurfaceRenderer/SandSurfaceRenderer.h"
 #include "Games/MapGameController.h"
 #include "Games/BoidGameController.h"
+#include "Games/CustomMapGame.h"
 
 class ofApp : public ofBaseApp {
 
@@ -57,6 +58,9 @@ private:
 	SandSurfaceRenderer* sandSurfaceRenderer;
 	CMapGameController mapGameController;
 	CBoidGameController boidGameController;
+
+	// Custom definitions not in original Magic Sand
+	CCustomMapGame customMapGame;
 
 	// Main window ROI 
 	ofRectangle mainWindowROI;

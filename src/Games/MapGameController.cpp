@@ -39,7 +39,7 @@ CMapGameController::CMapGameController()
 	MaxSearchAngle = 180 + 45;
 
 	ROI = cv::Rect(xmin, ymin, xmax - xmin, ymax - ymin);
-	referenceMapHandler.Init();
+	referenceMapHandler.Init("mapGame/ReferenceData/");
 	ShowScore = false;
 	ButtonPressTime = -1;
 
@@ -72,7 +72,7 @@ void CMapGameController::setup(std::shared_ptr<KinectProjector> const& k)
 	//if (!nameFont.loadFont("cooperBlack.ttf", 64))
 	//	std::cout << "Could not read font cooperBlack.ttf" << std::endl;
 
-	referenceMapHandler.Init();
+	referenceMapHandler.Init("mapGame/ReferenceData/");
 	referenceMapHandler.SetCycleMode(2);
 	int nRefMaps = referenceMapHandler.ReferenceMaps.size();
 	scoreTrackers.resize(nRefMaps);

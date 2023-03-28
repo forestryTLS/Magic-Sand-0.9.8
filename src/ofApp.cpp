@@ -58,6 +58,10 @@ void ofApp::setup() {
 	boidGameController.setKinectRes(kinectRes);
 	boidGameController.setKinectROI(kinectROI);
 
+	customMapGame.setup(kinectProjector);
+	customMapGame.setProjectorRes(projRes);
+	customMapGame.setKinectRes(kinectRes);
+	customMapGame.setKinectROI(kinectROI);
 }
 
 
@@ -67,15 +71,18 @@ void ofApp::update() {
    	sandSurfaceRenderer->update();
     
     //if (kinectProjector->isROIUpdated())
-	if (kinectProjector->getKinectROI() != mapGameController.getKinectROI())
+	if (kinectProjector->getKinectROI() != mapGameController.getKinectROI() || kinectProjector->getKinectROI() != customMapGame.getKinectROI())
 	{
 		ofRectangle kinectROI = kinectProjector->getKinectROI();
 		mapGameController.setKinectROI(kinectROI);
+		customMapGame.setKinectROI(kinectROI);
 		boidGameController.setKinectROI(kinectROI);
 	}
 
 	mapGameController.update();
+	customMapGame.update();
 	boidGameController.update();
+	customMapGame.update();
 }
 
 
@@ -101,6 +108,7 @@ void ofApp::drawProjWindow(ofEventArgs &args)
 	{
 		sandSurfaceRenderer->drawProjectorWindow();
 		mapGameController.drawProjectorWindow();
+		customMapGame.drawProjectorWindow();
 		boidGameController.drawProjectorWindow();
 	}
 	kinectProjector->drawProjectorWindow();
@@ -137,11 +145,32 @@ void ofApp::keyPressed(int key)
 			kinectProjector->startApplication();
 		}
 	}
+	else if (key == 'a')
+	{
+		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING &&
+			boidGameController.isIdle()) // do not start map game if boidgame is not idle
+		{
+			if (customMapGame.isIdle())
+			{
+				customMapGame.setDebug(kinectProjector->getDumpDebugFiles());
+				customMapGame.StartGame();
+			}
+			else
+			{
+				customMapGame.ButtonPressed();
+			}
+		}
+		else if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_SETUP)
+		{
+			// Try to start the application
+			kinectProjector->startApplication();
+		}
+	}
 	else if (key == 'f' || key == 'r')
 	{
 		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING)
 		{
-			if (mapGameController.isIdle())
+			if (mapGameController.isIdle() && customMapGame.isIdle())
 			{
 				boidGameController.setDebug(kinectProjector->getDumpDebugFiles());
 				boidGameController.StartGame(2);
@@ -149,12 +178,13 @@ void ofApp::keyPressed(int key)
 			else 
 			{
 				mapGameController.EndButtonPressed();
+				customMapGame.EndButtonPressed();
 			}
 		}
 	}
 	else if (key == '1') // Absolute beginner
 	{
-		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle())
+		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle() && customMapGame.isIdle())
 		{
 			boidGameController.setDebug(kinectProjector->getDumpDebugFiles());
 			boidGameController.StartGame(0);
@@ -162,7 +192,7 @@ void ofApp::keyPressed(int key)
 	}
 	else if (key == '2') 
 	{
-		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle())
+		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle() && customMapGame.isIdle())
 		{
 			boidGameController.setDebug(kinectProjector->getDumpDebugFiles());
 			boidGameController.StartGame(1);
@@ -170,7 +200,7 @@ void ofApp::keyPressed(int key)
 	}
 	else if (key == '3')
 	{
-		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle())
+		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle() && customMapGame.isIdle())
 		{
 			boidGameController.setDebug(kinectProjector->getDumpDebugFiles());
 			boidGameController.StartGame(2);
@@ -178,7 +208,7 @@ void ofApp::keyPressed(int key)
 	}
 	else if (key == '4')
 	{
-		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle())
+		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle() && customMapGame.isIdle())
 		{
 			boidGameController.setDebug(kinectProjector->getDumpDebugFiles());
 			boidGameController.StartGame(3);
@@ -186,7 +216,7 @@ void ofApp::keyPressed(int key)
 	}
 	else if (key == 'm')
 	{
-		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle())
+		if (kinectProjector->GetApplicationState() == KinectProjector::APPLICATION_STATE_RUNNING && mapGameController.isIdle() && customMapGame.isIdle())
 		{
 			boidGameController.setDebug(kinectProjector->getDumpDebugFiles());
 			boidGameController.StartSeekMotherGame();

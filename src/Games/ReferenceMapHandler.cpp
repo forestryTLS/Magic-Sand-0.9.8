@@ -41,8 +41,9 @@ CReferenceMapHandler::~CReferenceMapHandler()
 }
 
 
-void CReferenceMapHandler::Init()
+void CReferenceMapHandler::Init(std::string dir)
 {
+	baseDir = dir;
 	ReadFromFile();
 	std::cout << "read " << ReferenceMaps.size() << " reference maps" << std::endl;
 }
@@ -116,7 +117,8 @@ void CReferenceMapHandler::PermuteMapOrder()
 
 bool CReferenceMapHandler::WriteToFile()
 {
-	std::string refName = "mapGame/ReferenceData/MapReferenceSettings.xml";
+	//std::string refName = "mapGame/ReferenceData/MapReferenceSettings.xml";
+	std::string refName = baseDir + "MapReferenceSettings.xml";
 
 	ofXml XMLOut;
 	XMLOut.addChild("MapReferenceSettings");
@@ -142,7 +144,9 @@ bool CReferenceMapHandler::WriteToFile()
 
 bool CReferenceMapHandler::ReadFromFile()
 {
-	std::string refName = "mapGame/ReferenceData/MapReferenceSettings.xml";
+	//std::string refName = "mapGame/ReferenceData/MapReferenceSettings.xml";
+	std::string refName = baseDir + "MapReferenceSettings.xml";
+
 
 	ReferenceNames.clear();
 	ReferenceMaps.clear();
@@ -187,4 +191,3 @@ void CReferenceMapHandler::SetCycleMode(int mode)
 		PermuteMapOrder();
 	}
 }
-
