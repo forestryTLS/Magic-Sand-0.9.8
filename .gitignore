@@ -23,6 +23,7 @@ bld/
 [Ll]og/
 bin/*
 !bin/data/
+bin/data/customMapGame/Scores/*.png
 bin/data/**/[Dd]ebug[Ff]iles/*
 bin/data/settings/*.xml
 **.DS_Store

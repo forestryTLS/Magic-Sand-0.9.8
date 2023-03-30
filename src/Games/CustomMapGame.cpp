@@ -840,35 +840,17 @@ void CCustomMapGame::SetupGameSequence()
 	GameSequence.push_back(GAME_STATE_SHOWSPLASHSCREEN);
 	GameSequenceTimings.push_back(3);
 
-	GameSequence.push_back(GAME_STATE_PLAYANDSHOWCOUNTDOWN);
-	GameSequenceTimings.push_back(30);
+	//GameSequence.push_back(GAME_STATE_PLAYANDSHOWCOUNTDOWN);
+	//GameSequenceTimings.push_back(30);
 
-	GameSequence.push_back(GAME_STATE_CHECKFORISLAND);
-	GameSequenceTimings.push_back(3);
+	//GameSequence.push_back(GAME_STATE_CHECKFORISLAND);
+	//GameSequenceTimings.push_back(3);
 
 	GameSequence.push_back(GAME_STATE_SHOWMAPNAME);
 	GameSequenceTimings.push_back(3);
 
 	GameSequence.push_back(GAME_STATE_PLAYANDSHOWCOUNTDOWN);
-	GameSequenceTimings.push_back(180);
-
-	//GameSequence.push_back(GAME_STATE_SHOWINTERMIDEATERESULT);
-	//GameSequenceTimings.push_back(5);
-
-	//GameSequence.push_back(GAME_STATE_PLAYANDSHOWCOUNTDOWN);
-	//GameSequenceTimings.push_back(60);
-
-	//GameSequence.push_back(GAME_STATE_SHOWINTERMIDEATERESULT);
-	//GameSequenceTimings.push_back(5);
-
-	////GameSequence.push_back(GAME_STATE_PLAYANDSHOWCOUNTDOWN);
-	////GameSequenceTimings.push_back(20);
-
-	////GameSequence.push_back(GAME_STATE_SHOWINTERMIDEATERESULT);
-	////GameSequenceTimings.push_back(5);
-
-	//GameSequence.push_back(GAME_STATE_PLAYANDSHOWCOUNTDOWN);
-	//GameSequenceTimings.push_back(30);
+	GameSequenceTimings.push_back(10);
 
 	GameSequence.push_back(GAME_STATE_SHOWFINALRESULT);
 	GameSequenceTimings.push_back(5);
