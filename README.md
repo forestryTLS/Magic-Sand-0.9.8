@@ -1,3 +1,16 @@
+Note: If you get GLFW undefined error: Go to ofAppGLFWWindow.h and the beginning should be:
+
+```
+#pragma once
+
+#define GLFW_INCLUDE_NONE
+#include "GLFW/glfw3.h"
+
+#include "ofConstants.h"
+#include "ofAppBaseWindow.h"
+#include "ofRectangle.h"
+```
+
 # Magic Sand
 Magic Sand is a software for operating an augmented reality sandbox like this one:
 
